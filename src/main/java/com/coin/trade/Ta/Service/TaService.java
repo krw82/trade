@@ -2,8 +2,8 @@ package com.coin.trade.Ta.Service;
 
 import java.util.List;
 
-import com.coin.trade.Ta.Service.Vo.TaVo;
+import com.coin.trade.Ta.Vo.TaVo;
 
 public interface TaService {
-    public List<TaVo> getTaList();
+    public List<TaVo> getApiTaList();
 }

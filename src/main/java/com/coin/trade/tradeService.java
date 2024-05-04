@@ -10,4 +10,6 @@ public interface tradeService {
     public String deleteOrder();
 
     public String postOrders();
+
+    public void insertOrderLog();
 }
