@@ -1,7 +1,7 @@
 package com.coin.trade;
 
 public interface tradeService {
-    public String getOrdersChance();
+    public String getOrdersChance(String market);
 
     public String getOrder();
 

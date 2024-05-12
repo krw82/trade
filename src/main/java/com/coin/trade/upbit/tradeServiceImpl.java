@@ -2,13 +2,31 @@ package com.coin.trade.upbit;
 
 import com.coin.trade.tradeService;
 
+import lombok.RequiredArgsConstructor;
+
+import java.util.HashMap;
+
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
 public class tradeServiceImpl implements tradeService {
 
+    private final upbitApi upbitApi;
+
     @Override
-    public String getOrdersChance() {
+    public String getOrdersChance(String market) {
         // https://api.upbit.com/v1/orders/chance
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOrdersChance'");
+        try {
+            HashMap<String, String> params = new HashMap();
+            params.put("market", market);
+            return upbitApi.requestUpbit(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
     @Override

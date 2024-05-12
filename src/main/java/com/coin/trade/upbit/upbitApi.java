@@ -2,12 +2,17 @@ package com.coin.trade.upbit;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.google.gson.Gson;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -15,19 +20,22 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Service
 public class upbitApi {
 
-    public void requestUpbit() {
-        String accessKey = System.getenv("UPBIT_OPEN_API_ACCESS_KEY");
-        String secretKey = System.getenv("UPBIT_OPEN_API_SECRET_KEY");
-        String serverUrl = System.getenv("UPBIT_OPEN_API_SERVER_URL");
+    @Value("${test.value}")
+    private String accessKey;
 
-        HashMap<String, String> params = new HashMap<>();
-        params.put("uuid", "9ca023a5-851b-4fec-9f0a-48cd83c2eaae");
+    @Value("${test.value2}")
+    private String secretKey;
+
+    public String requestUpbit(Map<String, String> params)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        String serverUrl = "https://api.upbit.com";
 
         ArrayList<String> queryElements = new ArrayList<>();
         for (Map.Entry<String, String> entity : params.entrySet()) {
@@ -53,16 +61,19 @@ public class upbitApi {
 
         try {
             HttpClient client = HttpClientBuilder.create().build();
-            HttpGet request = new HttpGet(serverUrl + "/v1/order?" + queryString);
+            HttpPost request = new HttpPost(serverUrl + "/v1/orders/chance?" + queryString);
             request.setHeader("Content-Type", "application/json");
             request.addHeader("Authorization", authenticationToken);
+            request.setEntity(new StringEntity(new Gson().toJson(params)));
 
             HttpResponse response = client.execute(request);
             HttpEntity entity = response.getEntity();
 
-            System.out.println(EntityUtils.toString(entity, "UTF-8"));
+            return EntityUtils.toString(entity, "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        throw new UnsupportedOperationException("Unimplemented method 'getOrdersChance'");
+
     }
 }
