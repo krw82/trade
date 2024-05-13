@@ -32,10 +32,8 @@ public class upbitApi {
     @Value("${test.value2}")
     private String secretKey;
 
-    public String requestUpbit(Map<String, String> params)
+    public String requestUpbit(Map<String, String> params, HttpPost request)
             throws NoSuchAlgorithmException, UnsupportedEncodingException {
-
-        String serverUrl = "https://api.upbit.com";
 
         ArrayList<String> queryElements = new ArrayList<>();
         for (Map.Entry<String, String> entity : params.entrySet()) {
@@ -61,7 +59,6 @@ public class upbitApi {
 
         try {
             HttpClient client = HttpClientBuilder.create().build();
-            HttpPost request = new HttpPost(serverUrl + "/v1/orders/chance?" + queryString);
             request.setHeader("Content-Type", "application/json");
             request.addHeader("Authorization", authenticationToken);
             request.setEntity(new StringEntity(new Gson().toJson(params)));
@@ -72,6 +69,7 @@ public class upbitApi {
             return EntityUtils.toString(entity, "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
+
         }
         throw new UnsupportedOperationException("Unimplemented method 'getOrdersChance'");
 

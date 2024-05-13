@@ -14,6 +14,8 @@ public class tradeServiceImpl implements tradeService {
 
     private final upbitApi upbitApi;
 
+    private final String SERVER_URL = "https://api.upbit.com";
+
     @Override
     public String getOrdersChance(String market) {
         // https://api.upbit.com/v1/orders/chance
@@ -21,7 +23,8 @@ public class tradeServiceImpl implements tradeService {
         try {
             HashMap<String, String> params = new HashMap();
             params.put("market", market);
-            return upbitApi.requestUpbit(params);
+            HttpPost post = new HttpPost(SERVER_URL + "/v1/orders/chance?" + queryString);
+            return upbitApi.requestUpbit(params, post);
         } catch (Exception e) {
             e.printStackTrace();
         }
