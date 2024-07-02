@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
 
+import org.apache.http.client.methods.HttpPost;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,9 +22,9 @@ public class tradeServiceImpl implements tradeService {
         // https://api.upbit.com/v1/orders/chance
         // TODO Auto-generated method stub
         try {
-            HashMap<String, String> params = new HashMap();
+            HashMap<String, String> params = new HashMap<>();
             params.put("market", market);
-            HttpPost post = new HttpPost(SERVER_URL + "/v1/orders/chance?" + queryString);
+            HttpPost post = new HttpPost(SERVER_URL + "/v1/orders/chance?" + "query");
             return upbitApi.requestUpbit(params, post);
         } catch (Exception e) {
             e.printStackTrace();

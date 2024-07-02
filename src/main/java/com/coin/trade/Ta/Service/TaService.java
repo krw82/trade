@@ -5,5 +5,5 @@ import java.util.List;
 import com.coin.trade.Ta.Vo.TaVo;
 
 public interface TaService {
-    public List<TaVo> getApiTaList();
+
 }

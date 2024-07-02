@@ -7,9 +7,4 @@ import com.coin.trade.Ta.Vo.TaVo;
 
 public class TaServiceImpl implements TaService {
 
-    @Override
-    public List<TaVo> getApiTaList() {
-        return null;
-    }
-
 }
