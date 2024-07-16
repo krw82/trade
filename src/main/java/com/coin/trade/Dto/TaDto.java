@@ -1,11 +1,11 @@
-package com.coin.trade.Ta.Vo;
+package com.coin.trade.Dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class TaVo {
+public class TaDto {
 
     private String symbol;
     private int rsiBet;

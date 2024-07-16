@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import com.coin.trade.Entity.AccountEntity;
 import com.coin.trade.Entity.TransactionEntity;
 import com.coin.trade.Transaction.TransactionRepository;
 import com.coin.trade.Transaction.TransactionService;
